@@ -7,6 +7,11 @@ export default function App() {
 
   const [dice, setDice] = useState(generateAllNewDice())
 
+
+  function rollDice() {
+    setDice(generateAllNewDice())
+  }
+
   function generateAllNewDice() {
     return new Array(10)
       .fill(0)
@@ -21,6 +26,7 @@ export default function App() {
       <div className="dice-container">
       {diceElements}
       </div>
+      <button className="roll-dice" onClick={rollDice}>Roll</button>
     </main>
   )
 }
