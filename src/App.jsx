@@ -18,12 +18,12 @@ export default function App() {
       .fill(0)
       .map(() => ({
         value: Math.ceil(Math.random() * 6),
-        isHeld: false,
+        isHeld: true,
         id: nanoid()
       }))
   }
 
-  const diceElements = dice.map(dieObj => <Die key={dieObj.id} value={dieObj.value}/>)
+  const diceElements = dice.map(dieObj => <Die key={dieObj.id} value={dieObj.value} isHeld={dieObj.isHeld}/>)
 
   
   return (
