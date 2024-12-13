@@ -17,13 +17,18 @@ export default function App() {
       .fill(0)
       .map(() => ({
         value: Math.ceil(Math.random() * 6),
-        isHeld: true,
+        isHeld: false,
         id: nanoid()
       }))
   }
 
   function rollDice() {
-    setDice(prevDice => prevDice.map(die => die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}))
+    if (gameWon) {
+      setDice(generateAllNewDice())
+    } else {
+      setDice(prevDice => prevDice.map(die => die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}))
+    }
+    
   }
 
   function hold(id) {
