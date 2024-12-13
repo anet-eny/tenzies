@@ -4,7 +4,6 @@ import { nanoid } from "nanoid"
 import ConfettiComponent from "./assets/ConfettiComponent"
 
 
-
 export default function App() {
 
   const [dice, setDice] = useState(() => generateAllNewDice())
@@ -52,10 +51,12 @@ export default function App() {
       id={dieObj.id}
     />)
 
-  
   return (
     <main>
       {gameWon && <ConfettiComponent />}
+      <div aria-live="polite" className="sr-only">
+                {gameWon && <p>Congratulations! You won! Press "New Game" to start again.</p>}
+      </div>
       <h1 className="title">Tenzies</h1>
       <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className="dice-container">
