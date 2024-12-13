@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Die from "./Die"
 import { nanoid } from "nanoid"
 import ConfettiComponent from "./assets/ConfettiComponent"
@@ -8,9 +8,16 @@ import ConfettiComponent from "./assets/ConfettiComponent"
 export default function App() {
 
   const [dice, setDice] = useState(() => generateAllNewDice())
+  const buttonRef = useRef(null)
 
   const gameWon = dice.every(die => die.isHeld) && 
      dice.every(die => die.value === dice[0].value)
+
+  useEffect(() => {
+    if (gameWon) {
+      buttonRef.current.focus()
+    }
+  }, [gameWon])
   
   function generateAllNewDice() {
     return new Array(10)
@@ -54,7 +61,7 @@ export default function App() {
       <div className="dice-container">
       {diceElements}
       </div>
-      <button className="roll-dice" onClick={rollDice}>{gameWon ? "New game" : "Roll"}</button>
+      <button ref={buttonRef} className="roll-dice" onClick={rollDice}>{gameWon ? "New game" : "Roll"}</button>
     </main>
   )
 }
