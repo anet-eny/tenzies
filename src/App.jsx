@@ -7,7 +7,7 @@ import ConfettiComponent from "./assets/ConfettiComponent"
 
 export default function App() {
 
-  const [dice, setDice] = useState(generateAllNewDice())
+  const [dice, setDice] = useState(() => generateAllNewDice())
 
   const gameWon = dice.every(die => die.isHeld) && 
      dice.every(die => die.value === dice[0].value)
